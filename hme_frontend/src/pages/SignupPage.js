@@ -1,14 +1,16 @@
 import React from "react";
+import SignupForm from "../components/SignupForm";
 
 /**
- * Signup page placeholder.
+ * Signup page rendering the camp signup form.
  * PUBLIC_INTERFACE
+ *
+ * Displays the playful, minimalistic signup form for new Burners and Admins within the dashboard layout.
  */
 function SignupPage() {
   return (
     <section>
-      <h2>Signup</h2>
-      <p>Signup form for new burners and returning members will display here.</p>
+      <SignupForm />
     </section>
   );
 }
