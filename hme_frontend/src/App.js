@@ -1,48 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import DashboardLayout from "./layout/DashboardLayout";
+import DashboardPage from "./pages/DashboardPage";
+import SignupPage from "./pages/SignupPage";
+import AccommodationsPage from "./pages/AccommodationsPage";
+import SchedulePage from "./pages/SchedulePage";
+import DuesPage from "./pages/DuesPage";
+import JobsPage from "./pages/JobsPage";
+import FoodPage from "./pages/FoodPage";
+import MealsPage from "./pages/MealsPage";
+import CalendarPage from "./pages/CalendarPage";
+import AdminPage from "./pages/AdminPage";
+import "./App.css";
 
-// PUBLIC_INTERFACE
+/**
+ * The main Application.
+ * PUBLIC_INTERFACE
+ */
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState("light");
 
   // Effect to apply theme to document element
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   // PUBLIC_INTERFACE
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
+    <Router>
+      <div className="App">
+        <button
+          className="theme-toggle"
           onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
         >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+          {theme === "light" ? "🌙 Dark" : "☀️ Light"}
         </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <DashboardLayout>
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/accommodations" element={<AccommodationsPage />} />
+            <Route path="/schedule" element={<SchedulePage />} />
+            <Route path="/dues" element={<DuesPage />} />
+            <Route path="/jobs" element={<JobsPage />} />
+            <Route path="/food" element={<FoodPage />} />
+            <Route path="/meals" element={<MealsPage />} />
+            <Route path="/calendar" element={<CalendarPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </DashboardLayout>
+      </div>
+    </Router>
   );
 }
 
